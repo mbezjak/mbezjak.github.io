@@ -1,0 +1,4 @@
+baseURL = 'https://mbezjak.github.io'
+languageCode = 'en-us'
+title = "Miro's blog"
+theme = "ananke"
