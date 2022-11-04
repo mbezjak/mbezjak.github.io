@@ -1,0 +1,62 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>Make Mulog Play Nice With Kaocha | Miro's blog</title><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="mulog is an excellent logging library for Clojure. It uses agents to process events asynchronously. This makes sense for deployed services.
+But what about executing (integration, functional, etc.) tests? Some tests runners (e.g. Kaocha) try to capture the test output while the test is executing and provide that output in case the test failed. Do those two libraries play well together? Not really. The output captured cannot be relied upon:"><meta name=generator content="Hugo 0.105.0"><meta name=robots content="noindex, nofollow"><link rel=stylesheet href=/ananke/css/main.min.css><meta property="og:title" content="Make Mulog Play Nice With Kaocha"><meta property="og:description" content="mulog is an excellent logging library for Clojure. It uses agents to process events asynchronously. This makes sense for deployed services.
+But what about executing (integration, functional, etc.) tests? Some tests runners (e.g. Kaocha) try to capture the test output while the test is executing and provide that output in case the test failed. Do those two libraries play well together? Not really. The output captured cannot be relied upon:"><meta property="og:type" content="article"><meta property="og:url" content="https://mbezjak.github.io/posts/make-mulog-play-nice-with-kaocha/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-11-04T17:16:10+01:00"><meta property="article:modified_time" content="2022-11-04T17:16:10+01:00"><meta itemprop=name content="Make Mulog Play Nice With Kaocha"><meta itemprop=description content="mulog is an excellent logging library for Clojure. It uses agents to process events asynchronously. This makes sense for deployed services.
+But what about executing (integration, functional, etc.) tests? Some tests runners (e.g. Kaocha) try to capture the test output while the test is executing and provide that output in case the test failed. Do those two libraries play well together? Not really. The output captured cannot be relied upon:"><meta itemprop=datePublished content="2022-11-04T17:16:10+01:00"><meta itemprop=dateModified content="2022-11-04T17:16:10+01:00"><meta itemprop=wordCount content="505"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Make Mulog Play Nice With Kaocha"><meta name=twitter:description content="mulog is an excellent logging library for Clojure. It uses agents to process events asynchronously. This makes sense for deployed services.
+But what about executing (integration, functional, etc.) tests? Some tests runners (e.g. Kaocha) try to capture the test output while the test is executing and provide that output in case the test failed. Do those two libraries play well together? Not really. The output captured cannot be relied upon:"></head><body class="ma0 avenir bg-near-white"><header><div class=bg-black><nav class="pv3 ph3 ph4-ns" role=navigation><div class="flex-l justify-between items-center center"><a href=/ class="f3 fw2 hover-white no-underline white-90 dib">Miro's blog</a><div class="flex-l items-center"><div class=ananke-socials></div></div></div></nav></div></header><main class=pb7 role=main><article class="flex-l flex-wrap justify-between mw8 center ph3"><header class="mt4 w-100"><aside class="instapaper_ignoref b helvetica tracked">POSTS</aside><div id=sharing class="mt3 ananke-socials"></div><h1 class="f1 athelas mt3 mb1">Make Mulog Play Nice With Kaocha</h1><time class="f6 mv4 dib tracked" datetime=2022-11-04T17:16:10+01:00>November 4, 2022</time></header><div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p><a href=https://github.com/BrunoBonacci/mulog>mulog</a> is an excellent logging library
+for Clojure. It uses agents to process events asynchronously. This makes sense
+for deployed services.</p><p>But what about executing (integration, functional, etc.) tests? Some tests
+runners (e.g. <a href=https://github.com/lambdaisland/kaocha>Kaocha</a>) try to capture
+the test output while the test is executing and provide that output in case the
+test failed. Do those two libraries play well together? Not really. The output
+captured cannot be relied upon:</p><ul><li>either the test output was not captured during the test execution at all (due
+to publish delay)</li><li>or the output of previous test (or several of them) was captured</li></ul><p>Not really what we want when we&rsquo;re trying to understand why the test failed.
+Worse still, there doesn&rsquo;t seem to be any configuration option to improve the
+situation. And the <a href=https://github.com/BrunoBonacci/mulog/blob/0.9.0/mulog-core/test/com/brunobonacci/mulog/test_publisher.clj#L65>test
+code</a>
+that mulog itself uses doesn&rsquo;t seem to be in a good direction for most projects
+because it makes all the tests wait for the next publish delay to be sure the
+events were processed.</p><p>Luckily not all is lost. We can use Clojure&rsquo;s late binding to change mulog.
+After a bit of looking around in mulog&rsquo;s source code and a dash of thinking,
+this is what I came to use. It works reliably and I didn&rsquo;t have any problems
+with it so far.</p><p><code>mulog_init.clj</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-clojure data-lang=clojure><span style=display:flex><span>(<span style=color:#66d9ef>ns </span>mulog-init
+</span></span><span style=display:flex><span>  (<span style=color:#e6db74>:require</span>
+</span></span><span style=display:flex><span>   [com.brunobonacci.mulog.buffer <span style=color:#e6db74>:as</span> buffer]
+</span></span><span style=display:flex><span>   [com.brunobonacci.mulog.core <span style=color:#e6db74>:as</span> mulog-core]
+</span></span><span style=display:flex><span>   [com.brunobonacci.mulog.publisher <span style=color:#e6db74>:as</span> publisher]))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>(<span style=color:#66d9ef>defn </span>make-mulog-sychronous []
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; What?</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; Mulog handles events in asynchronous nature. This makes sense. Event</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; processing and send off is done in another thread so that the main thread</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; is not blocked. This code makes mulog handles events synchronously.</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;;</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; Why?</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; Test runners (e.g. kaocha) capture test output while the test is running.</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; Capturing doesn&#39;t work at all if the event processing is asynchronous. What</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; usually happens is that:</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; - test B captures output from previously executed test A</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; - and/or output is completely lost</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; To have correct output capture, the event processing must be synchronous.</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;;</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; How?</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; The hack below is exploiting the fact that all `mulog/log` calls go through</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; `mulog-core/enqueue!`. From there the event processing is roughly (from</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; reading of the source code):</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; 1. added to an atom (for performance reasons)</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; 2. (in a new thread) picked up events from an atom and send to each</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;;    publisher&#39;s agent-buffer</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; 3. (possibly in yet another thread) picked up events from agent-buffer and</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;;    process them by executing each publisher independently</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; The hack is consisting of hijacking 1. and and immediately giving the event</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; to each publisher.</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;;</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; Note!</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; Because this is a hack, the implementation needs to be checked each time</span>
+</span></span><span style=display:flex><span>  <span style=color:#75715e>;; mulog dependency gets updated.</span>
+</span></span><span style=display:flex><span>  (<span style=color:#66d9ef>let </span>[f (<span style=color:#66d9ef>fn </span>[_ value]
+</span></span><span style=display:flex><span>            <span style=color:#75715e>;; we are even using a private function in `mulog-core`</span>
+</span></span><span style=display:flex><span>            (<span style=color:#66d9ef>let </span>[event (apply <span style=color:#f92672>@#</span><span style=color:#e6db74>&#39;mulog-core/merge-pairs</span> value)]
+</span></span><span style=display:flex><span>              (doseq [publisher (map <span style=color:#e6db74>:publisher</span> (map second <span style=color:#f92672>@</span>mulog-core/publishers))]
+</span></span><span style=display:flex><span>                (<span style=color:#a6e22e>publisher/publish</span> publisher (<span style=color:#a6e22e>buffer/enqueue</span> (<span style=color:#a6e22e>buffer/ring-buffer</span> <span style=color:#ae81ff>1</span>) event)))))]
+</span></span><span style=display:flex><span>    (<span style=color:#a6e22e>alter-var-root</span> <span style=color:#f92672>#</span><span style=color:#e6db74>&#39;mulog-core/enqueue!</span> (constantly f))))
+</span></span></code></pre></div><p>Above code can be used as part of system startup in <a href=https://mbezjak.github.io/posts/make-mulog-play-nice-with-kaocha/>Kaocha hooks</a>.</p><ul class=pa0></ul><div class="mt6 instapaper_ignoref"></div></div><aside class="w-30-l mt6-l"></aside></article></main><footer class="bg-black bottom-0 w-100 pa3" role=contentinfo><div class="flex justify-between"><a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href=https://mbezjak.github.io/>&copy; Miro's blog 2022</a><div><div class=ananke-socials></div></div></div></footer></body></html>
