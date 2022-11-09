@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://mbezjak.github.io/sitemap.xml
