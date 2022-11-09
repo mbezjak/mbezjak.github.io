@@ -1,4 +1,17 @@
 baseURL = 'https://mbezjak.github.io'
 languageCode = 'en-us'
 title = "Miro's blog"
-theme = "ananke"
+theme = "PaperMod"
+
+enableRobotsTXT = true
+
+[params]
+author = "Miro Bezjak"
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowRssButtonInSectionTermList = true
+
+[params.editPost]
+URL = "https://github.com/mbezjak/mbezjak.github.io/blob/main/content"
+Text = "Suggest Changes"
+appendFilePath = true
