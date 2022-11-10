@@ -1,11 +1,11 @@
 ---
 title: "Mulog Publisher for Nicer Local Development"
 date: 2022-11-09T12:22:17+01:00
-draft: true
+draft: false
 ---
 
 [mulog](https://github.com/BrunoBonacci/mulog) has a couple of console
-publishers already baked in:
+publishers ready for use:
 
 - [Simple console
   publisher](https://github.com/BrunoBonacci/mulog/blob/master/doc/publishers/simple-console-publisher.md):
@@ -17,14 +17,132 @@ publishers already baked in:
 Both can be used as publishers for **local development** (either running locally
 or [executing tests](../make-mulog-play-nice-with-kaocha). The problem is that
 their output is not something pleasant to look at. Even if the output is pretty
-printed. What I'd like is to just glance at the output and let my eyes
-immediately jump to an interesting part of the log without thinking too much.
-Standard Java logging libraries are on the right track here (for local
-development). They print a few key facts in column format. That way it's easier
-to ignore all events (and their info) and focus on the *right* exception message
-(or whatever is deemed important).
+printed. Here is a contrived example, with just 5 events.
 
-So why not just write your own publisher? Here is what worked for me.
+```
+{:mulog/event-name :company.system.slf4j-init/slf4j,
+ :mulog/timestamp 1668079374515,
+ :mulog/trace-id #mulog/flake "4mNpLawLr6vG7UiZo44Uxi4U-MgZ1ugS",
+ :mulog/namespace "company.system.slf4j-init",
+ :exception nil,
+ :level "INFO",
+ :logger "com.zaxxer.hikari.HikariDataSource",
+ :message "HikariPool-1 - Starting...",
+ :service-name "admin",
+ :thread-name "nREPL-session-28c2f6be-4dc4-4da5-ac67-b85d3f311112"}
+
+{:mulog/event-name :company.api.middleware/http-request,
+ :mulog/timestamp 1668080116247,
+ :mulog/trace-id #mulog/flake "4mNq0m69wO_Nirx1NblMWLocruE7ep44",
+ :mulog/namespace "company.api.middleware",
+ :content-length nil,
+ :content-type nil,
+ :endpoint "GET /",
+ :headers
+ {"user-agent"
+  "Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0",
+  "accept"
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+  "accept-language" "en-US,en;q=0.5"},
+ :ip-address nil,
+ :method "GET",
+ :params {},
+ :protocol "HTTP/1.1",
+ :request-body nil,
+ :request-id #uuid "e6572d57-665f-43e0-b68b-fc442b7e4930",
+ :scheme :http,
+ :server-name "localhost",
+ :server-port 8800,
+ :service-name "admin",
+ :thread-name "qtp1042791362-127",
+ :uri "/",
+ :user-agent
+ "Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0"}
+
+{:mulog/event-name :company.api.middleware/http-response,
+ :mulog/timestamp 1668080116248,
+ :mulog/trace-id #mulog/flake "4mNq0m6DvqK-odmeeuyzY44gDL2GnbWh",
+ :mulog/namespace "company.api.middleware",
+ :duration-ms 1,
+ :endpoint "GET /",
+ :headers {"Location" "/admin-ui/"},
+ :ip-address nil,
+ :method "GET",
+ :request-id #uuid "e6572d57-665f-43e0-b68b-fc442b7e4930",
+ :server-name "localhost",
+ :service-name "admin",
+ :status 302,
+ :thread-name "qtp1042791362-127",
+ :uri "/",
+ :user-agent
+ "Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0"}
+
+{:mulog/event-name :company.api.middleware/http-request,
+ :mulog/timestamp 1668080116584,
+ :mulog/trace-id #mulog/flake "4mNq0nMJVdAaywZpVcKPxGtJQ46ovt2D",
+ :mulog/namespace "company.api.middleware",
+ :content-length nil,
+ :content-type nil,
+ :endpoint "GET /api/v1/ui-configuration",
+ :headers
+ {"user-agent"
+  "Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0",
+  "accept" "application/json, text/plain, */*",
+  "accept-language" "en-US,en;q=0.5"},
+ :ip-address nil,
+ :method "GET",
+ :params {},
+ :protocol "HTTP/1.1",
+ :request-body nil,
+ :request-id #uuid "97ac32d0-f848-4d91-8245-f3b310154b8a",
+ :scheme :http,
+ :server-name "localhost",
+ :server-port 8800,
+ :service-name "admin",
+ :thread-name "qtp1042791362-122",
+ :uri "/api/v1/ui-configuration",
+ :user-agent
+ "Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0"}
+
+{:mulog/event-name :company.api.middleware/http-response,
+ :mulog/timestamp 1668080116586,
+ :mulog/trace-id #mulog/flake "4mNq0nMm1AQX9ZpqW-NMe7r324ub74Od",
+ :mulog/namespace "company.api.middleware",
+ :duration-ms 0,
+ :endpoint "GET /api/v1/ui-configuration",
+ :headers nil,
+ :ip-address nil,
+ :method "GET",
+ :request-id #uuid "97ac32d0-f848-4d91-8245-f3b310154b8a",
+ :server-name "localhost",
+ :service-name "admin",
+ :status 200,
+ :thread-name "qtp1042791362-122",
+ :uri "/api/v1/ui-configuration",
+ :user-agent
+ "Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0"}
+```
+
+What I'd like is to just glance at the output and let my eyes immediately jump
+to an interesting part of the log without thinking too much. Standard Java
+logging libraries are on the right track here (for local development). They
+print a few key facts in column format. That way it's easier to ignore all
+events (and their info) and focus on the *right* exception message (or whatever
+is deemed important). Here are the same 5 events from above but presented a bit
+nicer.
+
+```
+12:15:40.504 :company.system.slf4j-init/slf4j INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting...
+12:36:57.791 :company.api.middleware/http-request GET /admin-ui
+{:params {}}
+12:36:57.791 :company.api.middleware/http-response GET /admin-ui HTTP 200 in 1 ms
+12:36:57.908 :company.api.middleware/http-request GET /api/v1/ui-configuration
+{:params {}}
+12:36:57.908 :company.api.middleware/http-response GET /api/v1/ui-configuration HTTP 200 in 0 ms
+```
+
+How can we get the output above? By writing a new publisher. This is not a big
+deal with mulog.
 
 A few notes for the code below:
 
