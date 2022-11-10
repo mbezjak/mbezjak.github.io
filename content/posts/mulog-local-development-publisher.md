@@ -15,11 +15,11 @@ publishers already baked in:
   output in JSON format
 
 Both can be used as publishers for **local development** (either running locally
-or [executing tests]({{<ref "/posts/make-mulog-play-nice-with-kaocha.md">}})).
-The problem is that their output is not something pleasant to look at. Even if
-the output is pretty printed. What I'd like is to just glance at the output and
-let my eyes immediately jump to an interesting part of the log without thinking
-too much. Standard Java logging libraries are on the right track here (for local
+or [executing tests](../make-mulog-play-nice-with-kaocha). The problem is that
+their output is not something pleasant to look at. Even if the output is pretty
+printed. What I'd like is to just glance at the output and let my eyes
+immediately jump to an interesting part of the log without thinking too much.
+Standard Java logging libraries are on the right track here (for local
 development). They print a few key facts in column format. That way it's easier
 to ignore all events (and their info) and focus on the *right* exception message
 (or whatever is deemed important).

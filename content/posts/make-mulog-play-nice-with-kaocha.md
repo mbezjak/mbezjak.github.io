@@ -77,5 +77,5 @@ with it so far.
     (alter-var-root #'mulog-core/enqueue! (constantly f))))
 ```
 
-The code above can be used as part of system startup in [Kaocha hooks]({{<ref
- "/posts/make-mulog-play-nice-with-kaocha.md" >}}).
+The code above can be used as part of system startup in [Kaocha
+hooks](../make-mulog-play-nice-with-kaocha).
