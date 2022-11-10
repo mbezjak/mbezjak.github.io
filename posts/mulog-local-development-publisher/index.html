@@ -1,0 +1,194 @@
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Mulog Publisher for Nicer Local Development | Miro's blog</title><meta name=keywords content><meta name=description content="mulog has a couple of console publishers ready for use:
+Simple console publisher: output in EDN format Advanced console publisher: output in JSON format Both can be used as publishers for local development (either running locally or executing tests. The problem is that their output is not something pleasant to look at. Even if the output is pretty printed. Here is a contrived example, with just 5 events.
+{:mulog/event-name :company.system.slf4j-init/slf4j, :mulog/timestamp 1668079374515, :mulog/trace-id #mulog/flake &#34;4mNpLawLr6vG7UiZo44Uxi4U-MgZ1ugS&#34;, :mulog/namespace &#34;company."><meta name=author content="Miro Bezjak"><link rel=canonical href=https://mbezjak.github.io/posts/mulog-local-development-publisher/><link crossorigin=anonymous href=/assets/css/stylesheet.bc1149f4a72aa4858d3a9f71462f75e5884ffe8073ea9d6d5761d5663d651e20.css integrity="sha256-vBFJ9KcqpIWNOp9xRi915YhP/oBz6p1tV2HVZj1lHiA=" rel="preload stylesheet" as=style><script defer crossorigin=anonymous src=/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG+9vmJ0cTS+ovo0FeA=" onload=hljs.initHighlightingOnLoad()></script>
+<link rel=icon href=https://mbezjak.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://mbezjak.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://mbezjak.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://mbezjak.github.io/apple-touch-icon.png><link rel=mask-icon href=https://mbezjak.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--hljs-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:title" content="Mulog Publisher for Nicer Local Development"><meta property="og:description" content="mulog has a couple of console publishers ready for use:
+Simple console publisher: output in EDN format Advanced console publisher: output in JSON format Both can be used as publishers for local development (either running locally or executing tests. The problem is that their output is not something pleasant to look at. Even if the output is pretty printed. Here is a contrived example, with just 5 events.
+{:mulog/event-name :company.system.slf4j-init/slf4j, :mulog/timestamp 1668079374515, :mulog/trace-id #mulog/flake &#34;4mNpLawLr6vG7UiZo44Uxi4U-MgZ1ugS&#34;, :mulog/namespace &#34;company."><meta property="og:type" content="article"><meta property="og:url" content="https://mbezjak.github.io/posts/mulog-local-development-publisher/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-11-09T12:22:17+01:00"><meta property="article:modified_time" content="2022-11-09T12:22:17+01:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Mulog Publisher for Nicer Local Development"><meta name=twitter:description content="mulog has a couple of console publishers ready for use:
+Simple console publisher: output in EDN format Advanced console publisher: output in JSON format Both can be used as publishers for local development (either running locally or executing tests. The problem is that their output is not something pleasant to look at. Even if the output is pretty printed. Here is a contrived example, with just 5 events.
+{:mulog/event-name :company.system.slf4j-init/slf4j, :mulog/timestamp 1668079374515, :mulog/trace-id #mulog/flake &#34;4mNpLawLr6vG7UiZo44Uxi4U-MgZ1ugS&#34;, :mulog/namespace &#34;company."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":2,"name":"Posts","item":"https://mbezjak.github.io/posts/"},{"@type":"ListItem","position":3,"name":"Mulog Publisher for Nicer Local Development","item":"https://mbezjak.github.io/posts/mulog-local-development-publisher/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Mulog Publisher for Nicer Local Development","name":"Mulog Publisher for Nicer Local Development","description":"mulog has a couple of console publishers ready for use:\nSimple console publisher: output in EDN format Advanced console publisher: output in JSON format Both can be used as publishers for local development (either running locally or executing tests. The problem is that their output is not something pleasant to look at. Even if the output is pretty printed. Here is a contrived example, with just 5 events.\n{:mulog/event-name :company.system.slf4j-init/slf4j, :mulog/timestamp 1668079374515, :mulog/trace-id #mulog/flake \u0026#34;4mNpLawLr6vG7UiZo44Uxi4U-MgZ1ugS\u0026#34;, :mulog/namespace \u0026#34;company.","keywords":[],"articleBody":"mulog has a couple of console publishers ready for use:\nSimple console publisher: output in EDN format Advanced console publisher: output in JSON format Both can be used as publishers for local development (either running locally or executing tests. The problem is that their output is not something pleasant to look at. Even if the output is pretty printed. Here is a contrived example, with just 5 events.\n{:mulog/event-name :company.system.slf4j-init/slf4j, :mulog/timestamp 1668079374515, :mulog/trace-id #mulog/flake \"4mNpLawLr6vG7UiZo44Uxi4U-MgZ1ugS\", :mulog/namespace \"company.system.slf4j-init\", :exception nil, :level \"INFO\", :logger \"com.zaxxer.hikari.HikariDataSource\", :message \"HikariPool-1 - Starting...\", :service-name \"admin\", :thread-name \"nREPL-session-28c2f6be-4dc4-4da5-ac67-b85d3f311112\"} {:mulog/event-name :company.api.middleware/http-request, :mulog/timestamp 1668080116247, :mulog/trace-id #mulog/flake \"4mNq0m69wO_Nirx1NblMWLocruE7ep44\", :mulog/namespace \"company.api.middleware\", :content-length nil, :content-type nil, :endpoint \"GET /\", :headers {\"user-agent\" \"Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0\", \"accept\" \"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8\", \"accept-language\" \"en-US,en;q=0.5\"}, :ip-address nil, :method \"GET\", :params {}, :protocol \"HTTP/1.1\", :request-body nil, :request-id #uuid \"e6572d57-665f-43e0-b68b-fc442b7e4930\", :scheme :http, :server-name \"localhost\", :server-port 8800, :service-name \"admin\", :thread-name \"qtp1042791362-127\", :uri \"/\", :user-agent \"Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0\"} {:mulog/event-name :company.api.middleware/http-response, :mulog/timestamp 1668080116248, :mulog/trace-id #mulog/flake \"4mNq0m6DvqK-odmeeuyzY44gDL2GnbWh\", :mulog/namespace \"company.api.middleware\", :duration-ms 1, :endpoint \"GET /\", :headers {\"Location\" \"/admin-ui/\"}, :ip-address nil, :method \"GET\", :request-id #uuid \"e6572d57-665f-43e0-b68b-fc442b7e4930\", :server-name \"localhost\", :service-name \"admin\", :status 302, :thread-name \"qtp1042791362-127\", :uri \"/\", :user-agent \"Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0\"} {:mulog/event-name :company.api.middleware/http-request, :mulog/timestamp 1668080116584, :mulog/trace-id #mulog/flake \"4mNq0nMJVdAaywZpVcKPxGtJQ46ovt2D\", :mulog/namespace \"company.api.middleware\", :content-length nil, :content-type nil, :endpoint \"GET /api/v1/ui-configuration\", :headers {\"user-agent\" \"Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0\", \"accept\" \"application/json, text/plain, */*\", \"accept-language\" \"en-US,en;q=0.5\"}, :ip-address nil, :method \"GET\", :params {}, :protocol \"HTTP/1.1\", :request-body nil, :request-id #uuid \"97ac32d0-f848-4d91-8245-f3b310154b8a\", :scheme :http, :server-name \"localhost\", :server-port 8800, :service-name \"admin\", :thread-name \"qtp1042791362-122\", :uri \"/api/v1/ui-configuration\", :user-agent \"Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0\"} {:mulog/event-name :company.api.middleware/http-response, :mulog/timestamp 1668080116586, :mulog/trace-id #mulog/flake \"4mNq0nMm1AQX9ZpqW-NMe7r324ub74Od\", :mulog/namespace \"company.api.middleware\", :duration-ms 0, :endpoint \"GET /api/v1/ui-configuration\", :headers nil, :ip-address nil, :method \"GET\", :request-id #uuid \"97ac32d0-f848-4d91-8245-f3b310154b8a\", :server-name \"localhost\", :service-name \"admin\", :status 200, :thread-name \"qtp1042791362-122\", :uri \"/api/v1/ui-configuration\", :user-agent \"Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0\"} What I’d like is to just glance at the output and let my eyes immediately jump to an interesting part of the log without thinking too much. Standard Java logging libraries are on the right track here (for local development). They print a few key facts in column format. That way it’s easier to ignore all events (and their info) and focus on the right exception message (or whatever is deemed important). Here are the same 5 events from above but presented a bit nicer.\n12:15:40.504 :company.system.slf4j-init/slf4j INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting... 12:36:57.791 :company.api.middleware/http-request GET /admin-ui {:params {}} 12:36:57.791 :company.api.middleware/http-response GET /admin-ui HTTP 200 in 1 ms 12:36:57.908 :company.api.middleware/http-request GET /api/v1/ui-configuration {:params {}} 12:36:57.908 :company.api.middleware/http-response GET /api/v1/ui-configuration HTTP 200 in 0 ms How can we get the output above? By writing a new publisher. This is not a big deal with mulog.\nA few notes for the code below:\nAdd your own keys (and their values) that you don’t consider worth looking at during development. Change the time formatting as you see fit. I don’t consider date to be important enough for local development. (:endpoint event) is something like \"POST /api/v1/users\". This is useful not only here, but also in Kibana. mulog_init.clj\n(ns mulog-init (:require [clojure.pprint :as pprint] [com.brunobonacci.mulog.buffer :as buffer] [com.brunobonacci.mulog.publisher :as publisher] [java-time.api :as time]) (:import (com.brunobonacci.mulog.publisher PPublisher))) (defn- ignore-uninteresting [event] (dissoc event :mulog/timestamp :mulog/event-name :mulog/trace-id :mulog/namespace :service-name :request-id :method :uri :user-agent :ip-address :server-name :thread-name)) (deftype LocalDevelopmentPublisher [buffer] PPublisher (agent-buffer [_] buffer) (publish-delay [_] 200) (publish [_ buffer] ;; events are pairs [offset ] (doseq [event (map second (buffer/items buffer))] (let [ts (time/format (time/formatter \"HH:mm:ss.SSS\") (time/local-date-time (time/instant (:mulog/timestamp event)) (time/zone-id \"Europe/Vienna\"))) en (:mulog/event-name event)] ;; We do this only for select few and very common events because we want ;; a good balance between good looking logs vs. having to maintain this. (condp = (:mulog/event-name event) :slf4j-init/slf4j (if-let [exception (:exception event)] (printf \"%s %s %s [%s] %s %s\\n\" ts en (:level event) (:logger event) (:message event) (pr-str exception)) (printf \"%s %s %s [%s] %s\\n\" ts en (:level event) (:logger event) (:message event))) :middleware/http-request (printf \"%s %s %s\\n%s\" ts en (:endpoint event) (with-out-str (pprint/pprint (dissoc (ignore-uninteresting event) :headers :protocol :scheme :thread-name :server-port :endpoint)))) :middleware/http-response (printf \"%s %s %s HTTP %s in %s ms\\n\" ts en (:endpoint event) (:status event) (:duration-ms event)) (printf \"%s %s\\n%s\" ts en (with-out-str (pprint/pprint (ignore-uninteresting event))))))) (flush) (buffer/clear buffer))) (defn- local-development-publisher [] (LocalDevelopmentPublisher. (buffer/agent-buffer 10000))) Then you can use the publisher by using inline type:\n(mulog/start-publisher! {:type :inline :publisher (mulog-init/local-development-publisher)}) ","wordCount":"715","inLanguage":"en","datePublished":"2022-11-09T12:22:17+01:00","dateModified":"2022-11-09T12:22:17+01:00","author":{"@type":"Person","name":"Miro Bezjak"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://mbezjak.github.io/posts/mulog-local-development-publisher/"},"publisher":{"@type":"Organization","name":"Miro's blog","logo":{"@type":"ImageObject","url":"https://mbezjak.github.io/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://mbezjak.github.io accesskey=h title="Miro's blog (Alt + H)">Miro's blog</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://mbezjak.github.io>Home</a>&nbsp;»&nbsp;<a href=https://mbezjak.github.io/posts/>Posts</a></div><h1 class=post-title>Mulog Publisher for Nicer Local Development</h1><div class=post-meta><span title='2022-11-09 12:22:17 +0100 +0100'>November 9, 2022</span>&nbsp;·&nbsp;Miro Bezjak&nbsp;|&nbsp;<a href=https://github.com/mbezjak/mbezjak.github.io/blob/main/content/posts/mulog-local-development-publisher.md rel="noopener noreferrer" target=_blank>Suggest Changes</a></div></header><div class=post-content><p><a href=https://github.com/BrunoBonacci/mulog>mulog</a> has a couple of console
+publishers ready for use:</p><ul><li><a href=https://github.com/BrunoBonacci/mulog/blob/master/doc/publishers/simple-console-publisher.md>Simple console
+publisher</a>:
+output in EDN format</li><li><a href=https://github.com/BrunoBonacci/mulog/blob/master/doc/publishers/advanced-console-publisher.md>Advanced console
+publisher</a>:
+output in JSON format</li></ul><p>Both can be used as publishers for <strong>local development</strong> (either running locally
+or <a href=../make-mulog-play-nice-with-kaocha>executing tests</a>. The problem is that
+their output is not something pleasant to look at. Even if the output is pretty
+printed. Here is a contrived example, with just 5 events.</p><pre tabindex=0><code>{:mulog/event-name :company.system.slf4j-init/slf4j,
+ :mulog/timestamp 1668079374515,
+ :mulog/trace-id #mulog/flake &#34;4mNpLawLr6vG7UiZo44Uxi4U-MgZ1ugS&#34;,
+ :mulog/namespace &#34;company.system.slf4j-init&#34;,
+ :exception nil,
+ :level &#34;INFO&#34;,
+ :logger &#34;com.zaxxer.hikari.HikariDataSource&#34;,
+ :message &#34;HikariPool-1 - Starting...&#34;,
+ :service-name &#34;admin&#34;,
+ :thread-name &#34;nREPL-session-28c2f6be-4dc4-4da5-ac67-b85d3f311112&#34;}
+
+{:mulog/event-name :company.api.middleware/http-request,
+ :mulog/timestamp 1668080116247,
+ :mulog/trace-id #mulog/flake &#34;4mNq0m69wO_Nirx1NblMWLocruE7ep44&#34;,
+ :mulog/namespace &#34;company.api.middleware&#34;,
+ :content-length nil,
+ :content-type nil,
+ :endpoint &#34;GET /&#34;,
+ :headers
+ {&#34;user-agent&#34;
+  &#34;Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0&#34;,
+  &#34;accept&#34;
+  &#34;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8&#34;,
+  &#34;accept-language&#34; &#34;en-US,en;q=0.5&#34;},
+ :ip-address nil,
+ :method &#34;GET&#34;,
+ :params {},
+ :protocol &#34;HTTP/1.1&#34;,
+ :request-body nil,
+ :request-id #uuid &#34;e6572d57-665f-43e0-b68b-fc442b7e4930&#34;,
+ :scheme :http,
+ :server-name &#34;localhost&#34;,
+ :server-port 8800,
+ :service-name &#34;admin&#34;,
+ :thread-name &#34;qtp1042791362-127&#34;,
+ :uri &#34;/&#34;,
+ :user-agent
+ &#34;Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0&#34;}
+
+{:mulog/event-name :company.api.middleware/http-response,
+ :mulog/timestamp 1668080116248,
+ :mulog/trace-id #mulog/flake &#34;4mNq0m6DvqK-odmeeuyzY44gDL2GnbWh&#34;,
+ :mulog/namespace &#34;company.api.middleware&#34;,
+ :duration-ms 1,
+ :endpoint &#34;GET /&#34;,
+ :headers {&#34;Location&#34; &#34;/admin-ui/&#34;},
+ :ip-address nil,
+ :method &#34;GET&#34;,
+ :request-id #uuid &#34;e6572d57-665f-43e0-b68b-fc442b7e4930&#34;,
+ :server-name &#34;localhost&#34;,
+ :service-name &#34;admin&#34;,
+ :status 302,
+ :thread-name &#34;qtp1042791362-127&#34;,
+ :uri &#34;/&#34;,
+ :user-agent
+ &#34;Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0&#34;}
+
+{:mulog/event-name :company.api.middleware/http-request,
+ :mulog/timestamp 1668080116584,
+ :mulog/trace-id #mulog/flake &#34;4mNq0nMJVdAaywZpVcKPxGtJQ46ovt2D&#34;,
+ :mulog/namespace &#34;company.api.middleware&#34;,
+ :content-length nil,
+ :content-type nil,
+ :endpoint &#34;GET /api/v1/ui-configuration&#34;,
+ :headers
+ {&#34;user-agent&#34;
+  &#34;Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0&#34;,
+  &#34;accept&#34; &#34;application/json, text/plain, */*&#34;,
+  &#34;accept-language&#34; &#34;en-US,en;q=0.5&#34;},
+ :ip-address nil,
+ :method &#34;GET&#34;,
+ :params {},
+ :protocol &#34;HTTP/1.1&#34;,
+ :request-body nil,
+ :request-id #uuid &#34;97ac32d0-f848-4d91-8245-f3b310154b8a&#34;,
+ :scheme :http,
+ :server-name &#34;localhost&#34;,
+ :server-port 8800,
+ :service-name &#34;admin&#34;,
+ :thread-name &#34;qtp1042791362-122&#34;,
+ :uri &#34;/api/v1/ui-configuration&#34;,
+ :user-agent
+ &#34;Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0&#34;}
+
+{:mulog/event-name :company.api.middleware/http-response,
+ :mulog/timestamp 1668080116586,
+ :mulog/trace-id #mulog/flake &#34;4mNq0nMm1AQX9ZpqW-NMe7r324ub74Od&#34;,
+ :mulog/namespace &#34;company.api.middleware&#34;,
+ :duration-ms 0,
+ :endpoint &#34;GET /api/v1/ui-configuration&#34;,
+ :headers nil,
+ :ip-address nil,
+ :method &#34;GET&#34;,
+ :request-id #uuid &#34;97ac32d0-f848-4d91-8245-f3b310154b8a&#34;,
+ :server-name &#34;localhost&#34;,
+ :service-name &#34;admin&#34;,
+ :status 200,
+ :thread-name &#34;qtp1042791362-122&#34;,
+ :uri &#34;/api/v1/ui-configuration&#34;,
+ :user-agent
+ &#34;Mozilla/5.0 (X11; Linux x86_64; rv:106.0) Gecko/20100101 Firefox/106.0&#34;}
+</code></pre><p>What I&rsquo;d like is to just glance at the output and let my eyes immediately jump
+to an interesting part of the log without thinking too much. Standard Java
+logging libraries are on the right track here (for local development). They
+print a few key facts in column format. That way it&rsquo;s easier to ignore all
+events (and their info) and focus on the <em>right</em> exception message (or whatever
+is deemed important). Here are the same 5 events from above but presented a bit
+nicer.</p><pre tabindex=0><code>12:15:40.504 :company.system.slf4j-init/slf4j INFO [com.zaxxer.hikari.HikariDataSource] HikariPool-1 - Starting...
+12:36:57.791 :company.api.middleware/http-request GET /admin-ui
+{:params {}}
+12:36:57.791 :company.api.middleware/http-response GET /admin-ui HTTP 200 in 1 ms
+12:36:57.908 :company.api.middleware/http-request GET /api/v1/ui-configuration
+{:params {}}
+12:36:57.908 :company.api.middleware/http-response GET /api/v1/ui-configuration HTTP 200 in 0 ms
+</code></pre><p>How can we get the output above? By writing a new publisher. This is not a big
+deal with mulog.</p><p>A few notes for the code below:</p><ul><li>Add your own keys (and their values) that you don&rsquo;t consider worth looking at
+during development.</li><li>Change the time formatting as you see fit. I don&rsquo;t consider date to be
+important enough for local development.</li><li><code>(:endpoint event)</code> is something like <code>"POST /api/v1/users"</code>. This is useful
+not only here, but also in <a href=https://www.elastic.co/kibana/>Kibana</a>.</li></ul><p><code>mulog_init.clj</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-clojure data-lang=clojure><span style=display:flex><span>(<span style=color:#66d9ef>ns </span>mulog-init
+</span></span><span style=display:flex><span>  (<span style=color:#e6db74>:require</span>
+</span></span><span style=display:flex><span>   [clojure.pprint <span style=color:#e6db74>:as</span> pprint]
+</span></span><span style=display:flex><span>   [com.brunobonacci.mulog.buffer <span style=color:#e6db74>:as</span> buffer]
+</span></span><span style=display:flex><span>   [com.brunobonacci.mulog.publisher <span style=color:#e6db74>:as</span> publisher]
+</span></span><span style=display:flex><span>   [java-time.api <span style=color:#e6db74>:as</span> time])
+</span></span><span style=display:flex><span>  (<span style=color:#e6db74>:import</span>
+</span></span><span style=display:flex><span>   (<span style=color:#a6e22e>com.brunobonacci.mulog.publisher</span> PPublisher)))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>(<span style=color:#66d9ef>defn- </span>ignore-uninteresting [event]
+</span></span><span style=display:flex><span>  (dissoc event
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>:mulog/timestamp</span> <span style=color:#e6db74>:mulog/event-name</span> <span style=color:#e6db74>:mulog/trace-id</span> <span style=color:#e6db74>:mulog/namespace</span>
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>:service-name</span> <span style=color:#e6db74>:request-id</span> <span style=color:#e6db74>:method</span> <span style=color:#e6db74>:uri</span> <span style=color:#e6db74>:user-agent</span> <span style=color:#e6db74>:ip-address</span>
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>:server-name</span> <span style=color:#e6db74>:thread-name</span>))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>(<span style=color:#66d9ef>deftype </span>LocalDevelopmentPublisher [buffer]
+</span></span><span style=display:flex><span>  PPublisher
+</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>agent-buffer</span> [_]
+</span></span><span style=display:flex><span>    buffer)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>publish-delay</span> [_]
+</span></span><span style=display:flex><span>    <span style=color:#ae81ff>200</span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>publish</span> [_ buffer]
+</span></span><span style=display:flex><span>    <span style=color:#75715e>;; events are pairs [offset &lt;event&gt;]</span>
+</span></span><span style=display:flex><span>    (doseq [event (map second (<span style=color:#a6e22e>buffer/items</span> buffer))]
+</span></span><span style=display:flex><span>      (<span style=color:#66d9ef>let </span>[ts (<span style=color:#a6e22e>time/format</span>
+</span></span><span style=display:flex><span>                (<span style=color:#a6e22e>time/formatter</span> <span style=color:#e6db74>&#34;HH:mm:ss.SSS&#34;</span>)
+</span></span><span style=display:flex><span>                (<span style=color:#a6e22e>time/local-date-time</span> (<span style=color:#a6e22e>time/instant</span> (<span style=color:#e6db74>:mulog/timestamp</span> event)) (<span style=color:#a6e22e>time/zone-id</span> <span style=color:#e6db74>&#34;Europe/Vienna&#34;</span>)))
+</span></span><span style=display:flex><span>            en (<span style=color:#e6db74>:mulog/event-name</span> event)]
+</span></span><span style=display:flex><span>        <span style=color:#75715e>;; We do this only for select few and very common events because we want</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>;; a good balance between good looking logs vs. having to maintain this.</span>
+</span></span><span style=display:flex><span>        (<span style=color:#a6e22e>condp</span> = (<span style=color:#e6db74>:mulog/event-name</span> event)
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>:slf4j-init/slf4j</span>
+</span></span><span style=display:flex><span>          (if-let [exception (<span style=color:#e6db74>:exception</span> event)]
+</span></span><span style=display:flex><span>            (<span style=color:#a6e22e>printf</span> <span style=color:#e6db74>&#34;%s %s %s [%s] %s %s\n&#34;</span> ts en (<span style=color:#e6db74>:level</span> event) (<span style=color:#e6db74>:logger</span> event) (<span style=color:#e6db74>:message</span> event) (pr-str exception))
+</span></span><span style=display:flex><span>            (<span style=color:#a6e22e>printf</span> <span style=color:#e6db74>&#34;%s %s %s [%s] %s\n&#34;</span> ts en (<span style=color:#e6db74>:level</span> event) (<span style=color:#e6db74>:logger</span> event) (<span style=color:#e6db74>:message</span> event)))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>:middleware/http-request</span>
+</span></span><span style=display:flex><span>          (<span style=color:#a6e22e>printf</span> <span style=color:#e6db74>&#34;%s %s %s\n%s&#34;</span> ts en (<span style=color:#e6db74>:endpoint</span> event)
+</span></span><span style=display:flex><span>                  (with-out-str (<span style=color:#a6e22e>pprint/pprint</span> (dissoc (<span style=color:#a6e22e>ignore-uninteresting</span> event)
+</span></span><span style=display:flex><span>                                                       <span style=color:#e6db74>:headers</span> <span style=color:#e6db74>:protocol</span> <span style=color:#e6db74>:scheme</span> <span style=color:#e6db74>:thread-name</span>
+</span></span><span style=display:flex><span>                                                       <span style=color:#e6db74>:server-port</span> <span style=color:#e6db74>:endpoint</span>))))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>:middleware/http-response</span>
+</span></span><span style=display:flex><span>          (<span style=color:#a6e22e>printf</span> <span style=color:#e6db74>&#34;%s %s %s HTTP %s in %s ms\n&#34;</span> ts en (<span style=color:#e6db74>:endpoint</span> event) (<span style=color:#e6db74>:status</span> event) (<span style=color:#e6db74>:duration-ms</span> event))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>          (<span style=color:#a6e22e>printf</span> <span style=color:#e6db74>&#34;%s %s\n%s&#34;</span> ts en (with-out-str (<span style=color:#a6e22e>pprint/pprint</span> (<span style=color:#a6e22e>ignore-uninteresting</span> event)))))))
+</span></span><span style=display:flex><span>    (<span style=color:#a6e22e>flush</span>)
+</span></span><span style=display:flex><span>    (<span style=color:#a6e22e>buffer/clear</span> buffer)))
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>(<span style=color:#66d9ef>defn- </span>local-development-publisher []
+</span></span><span style=display:flex><span>  (<span style=color:#a6e22e>LocalDevelopmentPublisher.</span> (<span style=color:#a6e22e>buffer/agent-buffer</span> <span style=color:#ae81ff>10000</span>)))
+</span></span></code></pre></div><p>Then you can <a href=https://github.com/BrunoBonacci/mulog#publishers>use</a> the
+publisher by using <a href=https://github.com/BrunoBonacci/mulog/blob/master/doc/publishers/inline-publishers.md>inline
+type</a>:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-clojure data-lang=clojure><span style=display:flex><span>(<span style=color:#a6e22e>mulog/start-publisher!</span>
+</span></span><span style=display:flex><span> {<span style=color:#e6db74>:type</span> <span style=color:#e6db74>:inline</span> <span style=color:#e6db74>:publisher</span> (<span style=color:#a6e22e>mulog-init/local-development-publisher</span>)})
+</span></span></code></pre></div></div><footer class=post-footer><ul class=post-tags></ul></footer></article></main><footer class=footer><span>&copy; 2022 <a href=https://mbezjak.github.io>Miro's blog</a></span>
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
