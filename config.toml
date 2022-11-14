@@ -15,3 +15,9 @@ ShowRssButtonInSectionTermList = true
 URL = "https://github.com/mbezjak/mbezjak.github.io/blob/main/content"
 Text = "Suggest Changes"
 appendFilePath = true
+
+[[menu.main]]
+identifier = "email"
+name = "Contact"
+url = "mailto:well.organized.bits@proton.me"
+weight = 10
