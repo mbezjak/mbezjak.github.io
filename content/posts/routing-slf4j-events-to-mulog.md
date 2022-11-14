@@ -98,6 +98,9 @@ What does it take to route slf4j events to mulog?
    (slf4j-init/setup-slf4j-to-mulog)
    ```
 
-Note that there is a different approach to this. One that doesn't use
-`logback-classic` as a dependency. I don't mind `logback-classic`, but if you
-do, take a look at this approach: https://gitlab.com/nonseldiha/slf4j-mulog
+## Alternatives
+
+- If you don't want to include `logback-classic` dependency, an alternative is
+  to create a slf4j binding. See https://gitlab.com/nonseldiha/slf4j-mulog
+- Write slf4j events into a separate ES index. See
+  https://github.com/BrunoBonacci/mulog/issues/25#issuecomment-654979743
