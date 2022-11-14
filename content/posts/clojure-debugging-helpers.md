@@ -82,7 +82,10 @@ Notice the variants `defn/d` and `let/d` instead of normal `clojure.core/defn`
 and `clojure.core/let`. What would it take for this to work? Here is what I
 ended up with and am quite happy using it.
 
-The two helper namespaces are in the `repl` directory.
+The two helper namespaces are in the `repl` directory. [^1]
+
+[^1]: For complete files see:
+    https://gist.github.com/mbezjak/0f11c0b550a0751c66903947328f947c
 
 `repl/defn.clj`
 
@@ -106,26 +109,6 @@ The two helper namespaces are in the `repl` directory.
     `(defn ~fn-name ~args
        ~@defs
        ~@body)))
-
-(comment
-  (defn foo [])
-  (defn foo [a b] (+ a b))
-  (defn foo [{:keys [a b]}] (+ a b))
-
-  (d foo "doc" [])
-  (d foo [])
-  (d foo [a b] (+ a b))
-  (d foo [{:keys [a b]}] (+ a b))
-  (d foo [& nums] (apply + nums))
-  (d foo [[a b]] (+ a b))
-  (d foo [[{:keys [a b]}]] (+ a b))
-  (d foo [& {:keys [a b]}] (+ a b))
-  (foo)
-  (foo 1 2)
-  (foo {:a 1 :b 2})
-  (foo [1 2])
-  (foo [{:a 1 :b 2}])
-  (foo :a 1 :b 2))
 ```
 
 `repl/let.clj`
@@ -142,25 +125,6 @@ The two helper namespaces are in the `repl` directory.
                                            (gensym "not-used") `(def ~s ~s)])))]
     `(let [~@bindings-with-defs]
        ~@body)))
-
-(comment
-  (let [a (+ 1 2)
-        b (inc a)
-        {:keys [c d]} {:c 1 :d 5}]
-    (+ a b c d))
-
-  (destructure '[a (+ 1 2)
-                 b (inc a)
-                 {:keys [c d]} {:c 1 :d 5}])
-
-  (d [a (+ 1 2)
-      b (inc a)
-      {:keys [c e]} {:c 1 :e 5}]
-     (+ a b c e))
-
-  (d [a (+ 1 2)
-      b (throw (ex-info "Can you see a?" {}))]
-     :not-relevant))
 ```
 
 For the helpers to be usable elsewhere in the project I made sure the following
