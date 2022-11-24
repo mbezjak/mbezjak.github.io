@@ -2,6 +2,7 @@ baseURL = 'https://mbezjak.github.io'
 languageCode = 'en-us'
 title = "Well Organized Bits"
 theme = "PaperMod"
+paginate = 50
 
 enableRobotsTXT = true
 
