@@ -4,8 +4,6 @@ title = "Well Organized Bits"
 theme = "PaperMod"
 paginate = 50
 
-enableRobotsTXT = true
-
 [params]
 author = "Miro Bezjak"
 ShowBreadCrumbs = true
