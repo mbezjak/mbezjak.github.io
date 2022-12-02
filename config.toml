@@ -15,6 +15,9 @@ URL = "https://github.com/mbezjak/mbezjak.github.io/blob/main/content"
 Text = "Suggest Changes"
 appendFilePath = true
 
+[params.analytics.google]
+SiteVerificationTag = "62Vyu3hWVePJQe8DUK8iM3Xn2VdjXAAagXEIxsL5To0"
+
 [[menu.main]]
 identifier = "archive"
 name = "Archive"
