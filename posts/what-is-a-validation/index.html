@@ -62,8 +62,8 @@ see <a href=https://clojars.org/metosin/malli>malli</a> can handle a large subse
 tasks above, so let&rsquo;s also beat it into submission and make it handle business
 constraints.</em> It&rsquo;s important to acknowledge their limits. It&rsquo;s unlikely that any
 open source library will help you with your business constraints. You need to
-make room in your project to handle them properly. More on that in the next blog
-post.</p><h2 id=appendix>Appendix<a hidden class=anchor aria-hidden=true href=#appendix>#</a></h2><p>If you happen to implement your system such that it recognizes all the relevant
+make room in your project to handle them properly. More on that in the <a href=../error-model>next
+blog post</a>.</p><h2 id=appendix>Appendix<a hidden class=anchor aria-hidden=true href=#appendix>#</a></h2><p>If you happen to implement your system such that it recognizes all the relevant
 subtasks above then a nice side benefit is that it&rsquo;s really easy to explore and
 course-correct using such a system. Event without any documentation. For
 example, you can keep executing <code>curl -X POST https://api.company.com/users -H '...' -d '...'</code> and learn something new.</p><ol><li>Oh I see I need to send something</li><li>Oh it needs to be a JSON</li><li>Oh a JSON object</li><li>Oh <code>email</code> and <code>dateOfBirth</code> are required</li><li>Oh <code>dateOfBirth</code> needs to be a string</li><li>Oh <code>email</code> needs to match a regex</li><li>Oh <code>dateOfBirth</code> needs to be in ISO8601 format</li><li>Does it accept time information? No!</li><li>Oh <code>john@example.com</code> already exists</li><li>&mldr; and so on</li></ol><p>If you&rsquo;ve ever used a system that guided you towards a solution, you know how
