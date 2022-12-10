@@ -118,8 +118,8 @@ see [malli](https://clojars.org/metosin/malli) can handle a large subset of the
 tasks above, so let's also beat it into submission and make it handle business
 constraints.* It's important to acknowledge their limits. It's unlikely that any
 open source library will help you with your business constraints. You need to
-make room in your project to handle them properly. More on that in the next blog
-post.
+make room in your project to handle them properly. More on that in the [next
+blog post](../error-model).
 
 ## Appendix
 
