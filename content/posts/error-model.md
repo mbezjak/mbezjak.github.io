@@ -276,7 +276,7 @@ implementation. Feel free to use it and adapt it to your situation.
 
 Now that we have the error model, implementation, and some useful operations
 (see appendix below), how do we use it? I need a whole new blog post for this.
-Stay tuned for part 3.
+Stay tuned for [part 3](../using-the-error-model).
 
 For now, just remember that the goal is for the project to use only `errors` (or
 however you've defined your model). If something external (library, service,
@@ -305,11 +305,11 @@ configuration, etc.
 {{< gist mbezjak c1baeece563b8ed734692938e6d1a36f error.clj >}}
 {{< gist mbezjak c1baeece563b8ed734692938e6d1a36f errors.clj >}}
 
-We'll see how to use this properly in part 3. However, here are a few (crude)
-usage examples.
+We'll see how to use this properly in [part 3](../using-the-error-model).
+However, here are a few (crude) usage examples.
 
 ```clojure
-;; creating errors\
+;; creating errors
 (errors/make-1 {:code :maintenance/in-progress})
 
 (errors/make-1 {:code :country/not-found
