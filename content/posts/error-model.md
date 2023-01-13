@@ -261,8 +261,8 @@ Here are some more ideas for you to think about and maybe try.
 - Mark error as `:log? false` to indicate that logging middleware should not log
   this error. Perhaps because it contains sensitive information. E.g. user
   credentials.
-- In a later blog post, we'll inject a bunch of information that's available
-  when using malli to validate the input.
+- In a [later blog post](../malli-validator), we'll inject a bunch of
+  information that's available when using malli to validate the input.
 
 It's all about carrying the information until some code higher up can decide
 what to do with it. This is one of the ways to get to immutable core, imperative
