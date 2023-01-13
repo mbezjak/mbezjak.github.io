@@ -126,8 +126,8 @@ indicate a bunch of services failed before reaching <code>:service-a</code>.</li
 (web/mobile/desktop application) or <code>:server</code>? This information can be used to
 influence the default HTTP status code. E.g. 4xx vs. 500.</li><li>Mark error as <code>:log? false</code> to indicate that logging middleware should not log
 this error. Perhaps because it contains sensitive information. E.g. user
-credentials.</li><li>In a later blog post, we&rsquo;ll inject a bunch of information that&rsquo;s available
-when using malli to validate the input.</li></ul><p>It&rsquo;s all about carrying the information until some code higher up can decide
+credentials.</li><li>In a <a href=../malli-validator>later blog post</a>, we&rsquo;ll inject a bunch of
+information that&rsquo;s available when using malli to validate the input.</li></ul><p>It&rsquo;s all about carrying the information until some code higher up can decide
 what to do with it. This is one of the ways to get to immutable core, imperative
 shell you might have heard about.</p><p>Defining the model is one thing. How might we implement it? Does the model have
 any useful operations? Well, yes. See the appendix below for one possible
