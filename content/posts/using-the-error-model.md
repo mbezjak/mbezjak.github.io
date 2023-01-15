@@ -252,7 +252,7 @@ validations succeeded to get the integer and do stuff with it. This has negative
 performance characteristics that you might not be ok with.
 
 This technique works for simple cases but breaks down for more complex ones.
-E.g. `call-external-services` might not want to return `nil` because that means
+E.g. `call-external-service` might not want to return `nil` because that means
 losing a lot of information needed for debugging and potentially error
 reporting. Information like `request`, `response`, exception, etc. In cases such
 as those, it's better to seek [alternative
