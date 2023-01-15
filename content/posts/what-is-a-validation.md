@@ -125,9 +125,9 @@ blog post](../error-model).
 
 If you happen to implement your system such that it recognizes all the relevant
 subtasks above then a nice side benefit is that it's really easy to explore and
-course-correct using such a system. Event without any documentation. For
-example, you can keep executing `curl -X POST https://api.company.com/users -H
-'...' -d '...'` and learn something new.
+course-correct using such a system. Even without any documentation. For example,
+you can keep executing `curl -X POST https://api.company.com/users -H '...' -d
+'...'` and learn something new.
 
 1. Oh I see I need to send something
 1. Oh it needs to be a JSON
