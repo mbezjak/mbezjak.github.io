@@ -81,7 +81,7 @@ some amorphous `rules`?
    - Cannot schedule the meeting because the person is out of office at the
      time
    - Pregnancy tests are only available to our female customers
-   - Order cannot be canceled because it's already shipped and on your way to you
+   - Order cannot be canceled because it's already shipped and on its way to you
    - That product has been recalled in the meantime due to safety concern
    - Cannot create a new reference to a note that has been deleted
    - Referenced file no longer exists in the system
