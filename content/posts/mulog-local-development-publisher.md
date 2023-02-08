@@ -207,7 +207,7 @@ A few notes for the code below:
     (flush)
     (buffer/clear buffer)))
 
-(defn- local-development-publisher []
+(defn local-development-publisher []
   (LocalDevelopmentPublisher. (buffer/agent-buffer 10000)))
 ```
 
