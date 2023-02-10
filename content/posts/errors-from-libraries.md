@@ -217,6 +217,10 @@ also reuse the error messages from `humanize`. This could get rid of duplicated
 templates between `error-template.edn` and `malli.error/default-errors`. Feel
 free to consider if this is worthwhile for your project.
 
+*Update 2023-02-10*: Also consider using `malli.error/with-error-messages`
+instead of `malli.error/humanize`. `with-error-messages` adds `:message` to all
+of the errors returned by `malli.core/explain`.
+
 ## What to do with the errors?
 
 ```clojure
