@@ -276,6 +276,9 @@ successful value or `errors`. I
 around with the monads before, but so far I haven't needed them in Clojure.
 However, for this particular use case, either monad might be worthwhile.
 
+*Update 2023-02-10*: Also check out
+[failjure](https://github.com/adambard/failjure) library.
+
 Here is what that would look like.
 
 ```clojure
